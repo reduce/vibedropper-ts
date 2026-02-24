@@ -60,7 +60,7 @@ $ yarn link spec
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global spec
+$ pnpm link --global spec
 ```
 
 ## Running tests
