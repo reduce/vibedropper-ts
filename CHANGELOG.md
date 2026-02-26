@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2026-02-26)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/reduce/vibedropper-ts/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* update SDK settings ([9501b2a](https://github.com/reduce/vibedropper-ts/commit/9501b2a248b4a946f2d3702b83af3370007ad544))
+
 ## 0.1.0 (2026-02-26)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/reduce/vibedropper-ts/compare/v0.0.1...v0.1.0)
