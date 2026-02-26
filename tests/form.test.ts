@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'spec/internal/uploads';
-import { toFile } from 'spec/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'vibedropper/internal/uploads';
+import { toFile } from 'vibedropper/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

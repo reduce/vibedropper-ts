@@ -1,61 +1,55 @@
-# Shared
+# Lists
 
 Types:
 
-- <code><a href="./src/resources/shared.ts">Order</a></code>
+- <code><a href="./src/resources/lists/lists.ts">List</a></code>
+- <code><a href="./src/resources/lists/lists.ts">ListRetrieveResponse</a></code>
+- <code><a href="./src/resources/lists/lists.ts">ListListResponse</a></code>
 
-# Pets
+Methods:
+
+- <code title="get /lists/{listId}">client.lists.<a href="./src/resources/lists/lists.ts">retrieve</a>(listID) -> ListRetrieveResponse</code>
+- <code title="get /lists">client.lists.<a href="./src/resources/lists/lists.ts">list</a>({ ...params }) -> ListListResponse</code>
+
+## Subscribers
 
 Types:
 
-- <code><a href="./src/resources/pets.ts">Category</a></code>
-- <code><a href="./src/resources/pets.ts">Pet</a></code>
-- <code><a href="./src/resources/pets.ts">PetFindByStatusResponse</a></code>
-- <code><a href="./src/resources/pets.ts">PetFindByTagsResponse</a></code>
-- <code><a href="./src/resources/pets.ts">PetUploadImageResponse</a></code>
+- <code><a href="./src/resources/lists/subscribers.ts">Subscriber</a></code>
+- <code><a href="./src/resources/lists/subscribers.ts">SubscriberListResponse</a></code>
+- <code><a href="./src/resources/lists/subscribers.ts">SubscriberAddResponse</a></code>
+- <code><a href="./src/resources/lists/subscribers.ts">SubscriberRemoveResponse</a></code>
 
 Methods:
 
-- <code title="post /pet">client.pets.<a href="./src/resources/pets.ts">create</a>({ ...params }) -> Pet</code>
-- <code title="get /pet/{petId}">client.pets.<a href="./src/resources/pets.ts">retrieve</a>(petID) -> Pet</code>
-- <code title="put /pet">client.pets.<a href="./src/resources/pets.ts">update</a>({ ...params }) -> Pet</code>
-- <code title="delete /pet/{petId}">client.pets.<a href="./src/resources/pets.ts">delete</a>(petID) -> void</code>
-- <code title="get /pet/findByStatus">client.pets.<a href="./src/resources/pets.ts">findByStatus</a>({ ...params }) -> PetFindByStatusResponse</code>
-- <code title="get /pet/findByTags">client.pets.<a href="./src/resources/pets.ts">findByTags</a>({ ...params }) -> PetFindByTagsResponse</code>
-- <code title="post /pet/{petId}">client.pets.<a href="./src/resources/pets.ts">updateByID</a>(petID, { ...params }) -> void</code>
-- <code title="post /pet/{petId}/uploadImage">client.pets.<a href="./src/resources/pets.ts">uploadImage</a>(petID, image, { ...params }) -> PetUploadImageResponse</code>
+- <code title="get /lists/{listId}/subscribers">client.lists.subscribers.<a href="./src/resources/lists/subscribers.ts">list</a>(listID) -> SubscriberListResponse</code>
+- <code title="post /lists/{listId}/subscribers">client.lists.subscribers.<a href="./src/resources/lists/subscribers.ts">add</a>(listID, { ...params }) -> SubscriberAddResponse</code>
+- <code title="delete /lists/{listId}/subscribers/{subscriberId}">client.lists.subscribers.<a href="./src/resources/lists/subscribers.ts">remove</a>(subscriberID, { ...params }) -> SubscriberRemoveResponse</code>
 
-# Store
+# Customers
 
 Types:
 
-- <code><a href="./src/resources/store/store.ts">StoreListInventoryResponse</a></code>
+- <code><a href="./src/resources/customers.ts">Customer</a></code>
+- <code><a href="./src/resources/customers.ts">CustomerRetrieveResponse</a></code>
+- <code><a href="./src/resources/customers.ts">CustomerUpdateResponse</a></code>
+- <code><a href="./src/resources/customers.ts">CustomerListResponse</a></code>
 
 Methods:
 
-- <code title="get /store/inventory">client.store.<a href="./src/resources/store/store.ts">listInventory</a>() -> StoreListInventoryResponse</code>
+- <code title="get /customers/{customerId}">client.customers.<a href="./src/resources/customers.ts">retrieve</a>(customerID) -> CustomerRetrieveResponse</code>
+- <code title="patch /customers/{customerId}">client.customers.<a href="./src/resources/customers.ts">update</a>(customerID, { ...params }) -> CustomerUpdateResponse</code>
+- <code title="get /customers">client.customers.<a href="./src/resources/customers.ts">list</a>({ ...params }) -> CustomerListResponse</code>
 
-## Orders
-
-Methods:
-
-- <code title="post /store/order">client.store.orders.<a href="./src/resources/store/orders.ts">create</a>({ ...params }) -> Order</code>
-- <code title="get /store/order/{orderId}">client.store.orders.<a href="./src/resources/store/orders.ts">retrieve</a>(orderID) -> Order</code>
-- <code title="delete /store/order/{orderId}">client.store.orders.<a href="./src/resources/store/orders.ts">delete</a>(orderID) -> void</code>
-
-# Users
+# Campaigns
 
 Types:
 
-- <code><a href="./src/resources/users.ts">User</a></code>
-- <code><a href="./src/resources/users.ts">UserLoginResponse</a></code>
+- <code><a href="./src/resources/campaigns.ts">Campaign</a></code>
+- <code><a href="./src/resources/campaigns.ts">CampaignRetrieveResponse</a></code>
+- <code><a href="./src/resources/campaigns.ts">CampaignListResponse</a></code>
 
 Methods:
 
-- <code title="post /user">client.users.<a href="./src/resources/users.ts">create</a>({ ...params }) -> User</code>
-- <code title="get /user/{username}">client.users.<a href="./src/resources/users.ts">retrieve</a>(username) -> User</code>
-- <code title="put /user/{username}">client.users.<a href="./src/resources/users.ts">update</a>(existingUsername, { ...params }) -> void</code>
-- <code title="delete /user/{username}">client.users.<a href="./src/resources/users.ts">delete</a>(username) -> void</code>
-- <code title="post /user/createWithList">client.users.<a href="./src/resources/users.ts">createWithList</a>([ ...items ]) -> User</code>
-- <code title="get /user/login">client.users.<a href="./src/resources/users.ts">login</a>({ ...params }) -> string</code>
-- <code title="get /user/logout">client.users.<a href="./src/resources/users.ts">logout</a>() -> void</code>
+- <code title="get /campaigns/{campaignId}">client.campaigns.<a href="./src/resources/campaigns.ts">retrieve</a>(campaignID) -> CampaignRetrieveResponse</code>
+- <code title="get /campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">list</a>() -> CampaignListResponse</code>

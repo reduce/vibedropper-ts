@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "spec/*": ["./dist/src/*"],
-      "spec": ["./dist/src/index.ts"]
+      "vibedropper/*": ["./dist/src/*"],
+      "vibedropper": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

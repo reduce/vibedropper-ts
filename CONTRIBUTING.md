@@ -42,25 +42,25 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ npm install git+ssh://git@github.com:stainless-sdks/spec-typescript.git
+$ npm install git+ssh://git@github.com:reduce/thyson.git
 ```
 
 Alternatively, to link a local copy of the repo:
 
 ```sh
 # Clone
-$ git clone https://www.github.com/stainless-sdks/spec-typescript
-$ cd spec-typescript
+$ git clone https://www.github.com/reduce/thyson
+$ cd thyson
 
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link spec
+$ yarn link vibedropper
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link --global spec
+$ pnpm link --global vibedropper
 ```
 
 ## Running tests

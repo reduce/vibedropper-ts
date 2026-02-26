@@ -11,36 +11,22 @@ import type { APIResponseProps } from './internal/parse';
 import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
-import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { Campaign, CampaignListResponse, CampaignRetrieveResponse, Campaigns } from './resources/campaigns';
 import {
-  Category,
-  Pet,
-  PetCreateParams,
-  PetFindByStatusParams,
-  PetFindByStatusResponse,
-  PetFindByTagsParams,
-  PetFindByTagsResponse,
-  PetUpdateByIDParams,
-  PetUpdateParams,
-  PetUploadImageParams,
-  PetUploadImageResponse,
-  Pets,
-} from './resources/pets';
-import {
-  User,
-  UserCreateParams,
-  UserCreateWithListParams,
-  UserLoginParams,
-  UserLoginResponse,
-  UserUpdateParams,
-  Users,
-} from './resources/users';
-import { Store, StoreListInventoryResponse } from './resources/store/store';
+  Customer,
+  CustomerListParams,
+  CustomerListResponse,
+  CustomerRetrieveResponse,
+  CustomerUpdateParams,
+  CustomerUpdateResponse,
+  Customers,
+} from './resources/customers';
+import { List, ListListParams, ListListResponse, ListRetrieveResponse, Lists } from './resources/lists/lists';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -56,14 +42,14 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['PETSTORE_API_KEY'].
+   * API key from Organization Settings > API. Use header: Authorization: Bearer <your_key> or X-API-Key: <your_key>
    */
   apiKey?: string | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['SPEC_BASE_URL'].
+   * Defaults to process.env['VIBEDROPPER_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -117,7 +103,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['SPEC_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['VIBEDROPPER_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -130,9 +116,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Spec API.
+ * API Client for interfacing with the Vibedropper API.
  */
-export class Spec {
+export class Vibedropper {
   apiKey: string;
 
   baseURL: string;
@@ -148,10 +134,10 @@ export class Spec {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Spec API.
+   * API Client for interfacing with the Vibedropper API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['PETSTORE_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['SPEC_BASE_URL'] ?? https://petstore3.swagger.io/api/v3] - Override the default base URL for the API.
+   * @param {string | undefined} [opts.apiKey=process.env['VIBEDROPPER_API_KEY'] ?? undefined]
+   * @param {string} [opts.baseURL=process.env['VIBEDROPPER_BASE_URL'] ?? https://vibedropper.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -160,31 +146,31 @@ export class Spec {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('SPEC_BASE_URL'),
-    apiKey = readEnv('PETSTORE_API_KEY'),
+    baseURL = readEnv('VIBEDROPPER_BASE_URL'),
+    apiKey = readEnv('VIBEDROPPER_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
-      throw new Errors.SpecError(
-        "The PETSTORE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Spec client with an apiKey option, like new Spec({ apiKey: 'My API Key' }).",
+      throw new Errors.VibedropperError(
+        "The VIBEDROPPER_API_KEY environment variable is missing or empty; either provide it, or instantiate the Vibedropper client with an apiKey option, like new Vibedropper({ apiKey: 'My API Key' }).",
       );
     }
 
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://petstore3.swagger.io/api/v3`,
+      baseURL: baseURL || `https://vibedropper.com/api/v1`,
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? Spec.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? Vibedropper.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('SPEC_LOG'), "process.env['SPEC_LOG']", this) ??
+      parseLogLevel(readEnv('VIBEDROPPER_LOG'), "process.env['VIBEDROPPER_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -219,7 +205,7 @@ export class Spec {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://petstore3.swagger.io/api/v3';
+    return this.baseURL !== 'https://vibedropper.com/api/v1';
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
@@ -231,11 +217,27 @@ export class Spec {
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ api_key: this.apiKey }]);
+    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
+  /**
+   * Basic re-implementation of `qs.stringify` for primitive types.
+   */
   protected stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
+    return Object.entries(query)
+      .filter(([_, value]) => typeof value !== 'undefined')
+      .map(([key, value]) => {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+          return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+        }
+        if (value === null) {
+          return `${encodeURIComponent(key)}=`;
+        }
+        throw new Errors.VibedropperError(
+          `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
+        );
+      })
+      .join('&');
   }
 
   private getUserAgent(): string {
@@ -718,10 +720,10 @@ export class Spec {
     }
   }
 
-  static Spec = this;
+  static Vibedropper = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static SpecError = Errors.SpecError;
+  static VibedropperError = Errors.VibedropperError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -737,44 +739,40 @@ export class Spec {
 
   static toFile = Uploads.toFile;
 
-  pets: API.Pets = new API.Pets(this);
-  store: API.Store = new API.Store(this);
-  users: API.Users = new API.Users(this);
+  lists: API.Lists = new API.Lists(this);
+  customers: API.Customers = new API.Customers(this);
+  campaigns: API.Campaigns = new API.Campaigns(this);
 }
 
-Spec.Pets = Pets;
-Spec.Store = Store;
-Spec.Users = Users;
+Vibedropper.Lists = Lists;
+Vibedropper.Customers = Customers;
+Vibedropper.Campaigns = Campaigns;
 
-export declare namespace Spec {
+export declare namespace Vibedropper {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Pets as Pets,
-    type Category as Category,
-    type Pet as Pet,
-    type PetFindByStatusResponse as PetFindByStatusResponse,
-    type PetFindByTagsResponse as PetFindByTagsResponse,
-    type PetUploadImageResponse as PetUploadImageResponse,
-    type PetCreateParams as PetCreateParams,
-    type PetUpdateParams as PetUpdateParams,
-    type PetFindByStatusParams as PetFindByStatusParams,
-    type PetFindByTagsParams as PetFindByTagsParams,
-    type PetUpdateByIDParams as PetUpdateByIDParams,
-    type PetUploadImageParams as PetUploadImageParams,
+    Lists as Lists,
+    type List as List,
+    type ListRetrieveResponse as ListRetrieveResponse,
+    type ListListResponse as ListListResponse,
+    type ListListParams as ListListParams,
   };
-
-  export { Store as Store, type StoreListInventoryResponse as StoreListInventoryResponse };
 
   export {
-    Users as Users,
-    type User as User,
-    type UserLoginResponse as UserLoginResponse,
-    type UserCreateParams as UserCreateParams,
-    type UserUpdateParams as UserUpdateParams,
-    type UserCreateWithListParams as UserCreateWithListParams,
-    type UserLoginParams as UserLoginParams,
+    Customers as Customers,
+    type Customer as Customer,
+    type CustomerRetrieveResponse as CustomerRetrieveResponse,
+    type CustomerUpdateResponse as CustomerUpdateResponse,
+    type CustomerListResponse as CustomerListResponse,
+    type CustomerUpdateParams as CustomerUpdateParams,
+    type CustomerListParams as CustomerListParams,
   };
 
-  export type Order = API.Order;
+  export {
+    Campaigns as Campaigns,
+    type Campaign as Campaign,
+    type CampaignRetrieveResponse as CampaignRetrieveResponse,
+    type CampaignListResponse as CampaignListResponse,
+  };
 }

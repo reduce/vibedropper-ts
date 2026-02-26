@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type Spec } from '../client';
+import { type Vibedropper } from '../client';
 
 import { type PromiseOrValue } from '../internal/types';
 import { APIResponseProps, defaultParseResponse } from '../internal/parse';
@@ -11,13 +11,13 @@ import { APIResponseProps, defaultParseResponse } from '../internal/parse';
  */
 export class APIPromise<T> extends Promise<T> {
   private parsedPromise: Promise<T> | undefined;
-  #client: Spec;
+  #client: Vibedropper;
 
   constructor(
-    client: Spec,
+    client: Vibedropper,
     private responsePromise: Promise<APIResponseProps>,
     private parseResponse: (
-      client: Spec,
+      client: Vibedropper,
       props: APIResponseProps,
     ) => PromiseOrValue<T> = defaultParseResponse,
   ) {

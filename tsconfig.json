@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "spec/*": ["./src/*"],
-      "spec": ["./src/index.ts"]
+      "vibedropper/*": ["./src/*"],
+      "vibedropper": ["./src/index.ts"]
     },
     "noEmit": true,
 
