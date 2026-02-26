@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Spec from 'spec';
+import Vibedropper from 'vibedropper';
 
-const client = new Spec({
+const client = new Vibedropper({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource orders', () => {
+describe('resource subscribers', () => {
   // Mock server tests are disabled
-  test.skip('create', async () => {
-    const responsePromise = client.store.orders.create();
+  test.skip('list', async () => {
+    const responsePromise = client.lists.subscribers.list('listId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,26 +21,8 @@ describe('resource orders', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('create: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.store.orders.create(
-        {
-          id: 10,
-          complete: true,
-          petId: 198772,
-          quantity: 7,
-          shipDate: '2019-12-27T18:11:19.117Z',
-          status: 'approved',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Spec.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.store.orders.retrieve(0);
+  test.skip('add: only required params', async () => {
+    const responsePromise = client.lists.subscribers.add('listId', { email: 'dev@stainless.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,8 +33,19 @@ describe('resource orders', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('delete', async () => {
-    const responsePromise = client.store.orders.delete(0);
+  test.skip('add: required and optional params', async () => {
+    const response = await client.lists.subscribers.add('listId', {
+      email: 'dev@stainless.com',
+      customFields: {},
+      name: 'name',
+      pickupLocationId: 'pickupLocationId',
+      regionId: 'regionId',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('remove: only required params', async () => {
+    const responsePromise = client.lists.subscribers.remove('subscriberId', { listId: 'listId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,5 +53,10 @@ describe('resource orders', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('remove: required and optional params', async () => {
+    const response = await client.lists.subscribers.remove('subscriberId', { listId: 'listId' });
   });
 });

@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { Spec } from '../client';
+import type { Vibedropper } from '../client';
 
 export abstract class APIResource {
-  protected _client: Spec;
+  protected _client: Vibedropper;
 
-  constructor(client: Spec) {
+  constructor(client: Vibedropper) {
     this._client = client;
   }
 }
