@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.0 (2026-02-27)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/reduce/vibedropper-ts/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* **mcp:** add an option to disable code tool ([8b0929b](https://github.com/reduce/vibedropper-ts/commit/8b0929b3d344df40d718060fc7bc9d36b39631da))
+
+
+### Bug Fixes
+
+* **mcp:** update prompt ([94b3d62](https://github.com/reduce/vibedropper-ts/commit/94b3d62ad9fce06a2ca0050ea9fbc319e16d2747))
+
+
+### Chores
+
+* configure new SDK language ([f61656b](https://github.com/reduce/vibedropper-ts/commit/f61656b3dec60daa2a0e1daa40fdfd6f2350fb99))
+* **internal:** move stringifyQuery implementation to internal function ([a7b87ac](https://github.com/reduce/vibedropper-ts/commit/a7b87acab41a67fe74751253fff674545e34d99d))
+
 ## 0.1.1 (2026-02-26)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/reduce/vibedropper-ts/compare/v0.1.0...v0.1.1)
