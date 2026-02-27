@@ -20,7 +20,7 @@ export const newMcpServer = async (stainlessApiKey: string | undefined) =>
   new McpServer(
     {
       name: 'vibedropper_api',
-      version: '0.2.0',
+      version: '0.2.1',
     },
     {
       instructions: await getInstructions(stainlessApiKey),
