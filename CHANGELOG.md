@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2 (2026-02-28)
+
+Full Changelog: [v0.2.1...v0.2.2](https://github.com/reduce/vibedropper-ts/compare/v0.2.1...v0.2.2)
+
+### Chores
+
+* **internal:** configure MCP Server hosting ([504936f](https://github.com/reduce/vibedropper-ts/commit/504936f7b1e94f31d221abf894fa609e50ca2097))
+
 ## 0.2.1 (2026-02-27)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/reduce/vibedropper-ts/compare/v0.2.0...v0.2.1)
