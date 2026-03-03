@@ -17,7 +17,13 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Campaign, CampaignListResponse, CampaignRetrieveResponse, Campaigns } from './resources/campaigns';
+import {
+  Campaign,
+  CampaignListParams,
+  CampaignListResponse,
+  CampaignRetrieveResponse,
+  Campaigns,
+} from './resources/campaigns';
 import {
   Customer,
   CustomerListParams,
@@ -762,5 +768,6 @@ export declare namespace Vibedropper {
     type Campaign as Campaign,
     type CampaignRetrieveResponse as CampaignRetrieveResponse,
     type CampaignListResponse as CampaignListResponse,
+    type CampaignListParams as CampaignListParams,
   };
 }

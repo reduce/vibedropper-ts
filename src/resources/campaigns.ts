@@ -16,8 +16,11 @@ export class Campaigns extends APIResource {
   /**
    * List campaigns
    */
-  list(options?: RequestOptions): APIPromise<CampaignListResponse> {
-    return this._client.get('/campaigns', options);
+  list(
+    query: CampaignListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CampaignListResponse> {
+    return this._client.get('/campaigns', { query, ...options });
   }
 }
 
@@ -47,10 +50,17 @@ export interface CampaignListResponse {
   campaigns?: Array<Campaign>;
 }
 
+export interface CampaignListParams {
+  limit?: number;
+
+  page?: number;
+}
+
 export declare namespace Campaigns {
   export {
     type Campaign as Campaign,
     type CampaignRetrieveResponse as CampaignRetrieveResponse,
     type CampaignListResponse as CampaignListResponse,
+    type CampaignListParams as CampaignListParams,
   };
 }
