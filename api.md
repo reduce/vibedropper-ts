@@ -52,4 +52,4 @@ Types:
 Methods:
 
 - <code title="get /campaigns/{campaignId}">client.campaigns.<a href="./src/resources/campaigns.ts">retrieve</a>(campaignID) -> CampaignRetrieveResponse</code>
-- <code title="get /campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">list</a>() -> CampaignListResponse</code>
+- <code title="get /campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">list</a>({ ...params }) -> CampaignListResponse</code>

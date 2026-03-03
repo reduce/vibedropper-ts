@@ -38,9 +38,21 @@ export class Customers extends APIResource {
 export interface Customer {
   id?: string;
 
+  addressLine1?: string | null;
+
+  addressLine2?: string | null;
+
   averageOrderValue?: number;
 
+  city?: string | null;
+
+  country?: string | null;
+
   email?: string;
+
+  firstName?: string | null;
+
+  lastName?: string | null;
 
   lastPurchaseDate?: string | null;
 
@@ -52,11 +64,15 @@ export interface Customer {
 
   pickupLocation?: unknown | null;
 
+  postalCode?: string | null;
+
   purchaseCount?: number;
 
   region?: unknown | null;
 
   roles?: Array<unknown>;
+
+  state?: string | null;
 
   totalSpent?: number;
 }
@@ -88,11 +104,27 @@ export namespace CustomerListResponse {
 }
 
 export interface CustomerUpdateParams {
+  addressLine1?: string | null;
+
+  addressLine2?: string | null;
+
+  city?: string | null;
+
+  country?: string | null;
+
+  firstName?: string | null;
+
+  lastName?: string | null;
+
   name?: string;
 
   pickupLocationId?: string | null;
 
+  postalCode?: string | null;
+
   regionId?: string | null;
+
+  state?: string | null;
 }
 
 export interface CustomerListParams {
@@ -100,6 +132,9 @@ export interface CustomerListParams {
 
   page?: number;
 
+  /**
+   * Search by name or email
+   */
   search?: string;
 }
 
