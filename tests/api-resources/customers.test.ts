@@ -39,9 +39,17 @@ describe('resource customers', () => {
       client.customers.update(
         'customerId',
         {
+          addressLine1: 'addressLine1',
+          addressLine2: 'addressLine2',
+          city: 'city',
+          country: 'country',
+          firstName: 'firstName',
+          lastName: 'lastName',
           name: 'name',
           pickupLocationId: 'pickupLocationId',
+          postalCode: 'postalCode',
           regionId: 'regionId',
+          state: 'state',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -66,7 +74,7 @@ describe('resource customers', () => {
     await expect(
       client.customers.list(
         {
-          limit: 0,
+          limit: 100,
           page: 0,
           search: 'search',
         },

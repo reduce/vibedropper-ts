@@ -14,7 +14,7 @@ export class Subscribers extends APIResource {
   }
 
   /**
-   * Add subscriber
+   * Add subscriber to list
    */
   add(
     listID: string,
@@ -25,7 +25,7 @@ export class Subscribers extends APIResource {
   }
 
   /**
-   * Remove subscriber
+   * Remove subscriber from list
    */
   remove(
     subscriberID: string,
