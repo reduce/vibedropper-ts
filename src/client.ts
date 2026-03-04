@@ -764,11 +764,29 @@ export class Vibedropper {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * Manage subscriber lists
+   */
   lists: API.Lists = new API.Lists(this);
+  /**
+   * Manage customers
+   */
   customers: API.Customers = new API.Customers(this);
+  /**
+   * Access email campaigns (read-only)
+   */
   campaigns: API.Campaigns = new API.Campaigns(this);
+  /**
+   * Manage forms and submissions
+   */
   forms: API.Forms = new API.Forms(this);
+  /**
+   * Manage knowledge bases and articles
+   */
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
+  /**
+   * Manage landing pages
+   */
   pages: API.Pages = new API.Pages(this);
 }
 

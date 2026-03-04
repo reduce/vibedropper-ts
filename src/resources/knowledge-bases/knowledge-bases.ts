@@ -15,6 +15,9 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Manage knowledge bases and articles
+ */
 export class KnowledgeBases extends APIResource {
   articles: ArticlesAPI.Articles = new ArticlesAPI.Articles(this._client);
 
