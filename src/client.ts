@@ -33,7 +33,44 @@ import {
   CustomerUpdateResponse,
   Customers,
 } from './resources/customers';
-import { List, ListListParams, ListListResponse, ListRetrieveResponse, Lists } from './resources/lists/lists';
+import {
+  Form,
+  FormDeleteResponse,
+  FormListParams,
+  FormListResponse,
+  FormListSubmissionsParams,
+  FormListSubmissionsResponse,
+  FormRetrieveResponse,
+  FormUpdateParams,
+  FormUpdateResponse,
+  Forms,
+} from './resources/forms';
+import {
+  Page,
+  PageDeleteResponse,
+  PageListParams,
+  PageListResponse,
+  PageRetrieveResponse,
+  PageUpdateParams,
+  PageUpdateResponse,
+  Pages,
+} from './resources/pages';
+import {
+  KnowledgeBase,
+  KnowledgeBaseListResponse,
+  KnowledgeBaseRetrieveResponse,
+  KnowledgeBaseUpdateParams,
+  KnowledgeBaseUpdateResponse,
+  KnowledgeBases,
+} from './resources/knowledge-bases/knowledge-bases';
+import {
+  List,
+  ListListParams,
+  ListListResponse,
+  ListRetrieveResponse,
+  Lists,
+  Pagination,
+} from './resources/lists/lists';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -736,11 +773,17 @@ export class Vibedropper {
   lists: API.Lists = new API.Lists(this);
   customers: API.Customers = new API.Customers(this);
   campaigns: API.Campaigns = new API.Campaigns(this);
+  forms: API.Forms = new API.Forms(this);
+  knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
+  pages: API.Pages = new API.Pages(this);
 }
 
 Vibedropper.Lists = Lists;
 Vibedropper.Customers = Customers;
 Vibedropper.Campaigns = Campaigns;
+Vibedropper.Forms = Forms;
+Vibedropper.KnowledgeBases = KnowledgeBases;
+Vibedropper.Pages = Pages;
 
 export declare namespace Vibedropper {
   export type RequestOptions = Opts.RequestOptions;
@@ -748,6 +791,7 @@ export declare namespace Vibedropper {
   export {
     Lists as Lists,
     type List as List,
+    type Pagination as Pagination,
     type ListRetrieveResponse as ListRetrieveResponse,
     type ListListResponse as ListListResponse,
     type ListListParams as ListListParams,
@@ -769,5 +813,38 @@ export declare namespace Vibedropper {
     type CampaignRetrieveResponse as CampaignRetrieveResponse,
     type CampaignListResponse as CampaignListResponse,
     type CampaignListParams as CampaignListParams,
+  };
+
+  export {
+    Forms as Forms,
+    type Form as Form,
+    type FormRetrieveResponse as FormRetrieveResponse,
+    type FormUpdateResponse as FormUpdateResponse,
+    type FormListResponse as FormListResponse,
+    type FormDeleteResponse as FormDeleteResponse,
+    type FormListSubmissionsResponse as FormListSubmissionsResponse,
+    type FormUpdateParams as FormUpdateParams,
+    type FormListParams as FormListParams,
+    type FormListSubmissionsParams as FormListSubmissionsParams,
+  };
+
+  export {
+    KnowledgeBases as KnowledgeBases,
+    type KnowledgeBase as KnowledgeBase,
+    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
+    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
+    type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
+    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
+  };
+
+  export {
+    Pages as Pages,
+    type Page as Page,
+    type PageRetrieveResponse as PageRetrieveResponse,
+    type PageUpdateResponse as PageUpdateResponse,
+    type PageListResponse as PageListResponse,
+    type PageDeleteResponse as PageDeleteResponse,
+    type PageUpdateParams as PageUpdateParams,
+    type PageListParams as PageListParams,
   };
 }

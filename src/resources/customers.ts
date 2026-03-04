@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as ListsAPI from './lists/lists';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -88,19 +89,7 @@ export interface CustomerUpdateResponse {
 export interface CustomerListResponse {
   customers?: Array<Customer>;
 
-  pagination?: CustomerListResponse.Pagination;
-}
-
-export namespace CustomerListResponse {
-  export interface Pagination {
-    limit?: number;
-
-    page?: number;
-
-    total?: number;
-
-    totalPages?: number;
-  }
+  pagination?: ListsAPI.Pagination;
 }
 
 export interface CustomerUpdateParams {

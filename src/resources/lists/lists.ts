@@ -58,6 +58,16 @@ export namespace List {
   }
 }
 
+export interface Pagination {
+  limit?: number;
+
+  page?: number;
+
+  total?: number;
+
+  totalPages?: number;
+}
+
 export interface ListRetrieveResponse {
   list?: List;
 }
@@ -65,19 +75,7 @@ export interface ListRetrieveResponse {
 export interface ListListResponse {
   lists?: Array<List>;
 
-  pagination?: ListListResponse.Pagination;
-}
-
-export namespace ListListResponse {
-  export interface Pagination {
-    limit?: number;
-
-    page?: number;
-
-    total?: number;
-
-    totalPages?: number;
-  }
+  pagination?: Pagination;
 }
 
 export interface ListListParams {
@@ -91,6 +89,7 @@ Lists.Subscribers = Subscribers;
 export declare namespace Lists {
   export {
     type List as List,
+    type Pagination as Pagination,
     type ListRetrieveResponse as ListRetrieveResponse,
     type ListListResponse as ListListResponse,
     type ListListParams as ListListParams,
