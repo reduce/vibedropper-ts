@@ -37,6 +37,9 @@ export interface KnowledgeBaseArticle {
 
   categoryId?: string | null;
 
+  /**
+   * HTML content
+   */
   content?: string;
 
   createdAt?: string;
@@ -82,7 +85,7 @@ export interface ArticleCreateParams {
   categoryId?: string | null;
 
   /**
-   * HTML or markdown content
+   * HTML content
    */
   content?: string;
 

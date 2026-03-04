@@ -8,14 +8,14 @@ import { path } from '../internal/utils/path';
 
 export class Customers extends APIResource {
   /**
-   * Get customer
+   * Get a customer
    */
   retrieve(customerID: string, options?: RequestOptions): APIPromise<CustomerRetrieveResponse> {
     return this._client.get(path`/customers/${customerID}`, options);
   }
 
   /**
-   * Update customer
+   * Update a customer
    */
   update(
     customerID: string,
@@ -49,6 +49,8 @@ export interface Customer {
 
   country?: string | null;
 
+  createdAt?: string;
+
   email?: string;
 
   firstName?: string | null;
@@ -57,7 +59,10 @@ export interface Customer {
 
   lastPurchaseDate?: string | null;
 
-  lists?: Array<unknown>;
+  /**
+   * Lists this customer is subscribed to
+   */
+  lists?: Array<Customer.List>;
 
   name?: string | null;
 
@@ -71,11 +76,37 @@ export interface Customer {
 
   region?: unknown | null;
 
-  roles?: Array<unknown>;
+  /**
+   * Roles assigned to this customer
+   */
+  roles?: Array<Customer.Role>;
 
   state?: string | null;
 
+  /**
+   * Total amount spent across all orders
+   */
   totalSpent?: number;
+
+  updatedAt?: string;
+}
+
+export namespace Customer {
+  export interface List {
+    id?: string;
+
+    name?: string;
+  }
+
+  export interface Role {
+    id?: string;
+
+    color?: string | null;
+
+    description?: string | null;
+
+    name?: string;
+  }
 }
 
 export interface CustomerRetrieveResponse {
@@ -122,7 +153,7 @@ export interface CustomerListParams {
   page?: number;
 
   /**
-   * Search by name or email
+   * Search by name or email (case-insensitive)
    */
   search?: string;
 }
