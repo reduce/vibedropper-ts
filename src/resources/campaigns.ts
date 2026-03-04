@@ -7,20 +7,18 @@ import { path } from '../internal/utils/path';
 
 export class Campaigns extends APIResource {
   /**
-   * Get campaign
+   * Get a campaign
    */
   retrieve(campaignID: string, options?: RequestOptions): APIPromise<CampaignRetrieveResponse> {
     return this._client.get(path`/campaigns/${campaignID}`, options);
   }
 
   /**
-   * List campaigns
+   * Returns all campaigns for the organization ordered by creation date descending.
+   * No pagination.
    */
-  list(
-    query: CampaignListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<CampaignListResponse> {
-    return this._client.get('/campaigns', { query, ...options });
+  list(options?: RequestOptions): APIPromise<CampaignListResponse> {
+    return this._client.get('/campaigns', options);
   }
 }
 
@@ -29,17 +27,50 @@ export interface Campaign {
 
   createdAt?: string;
 
-  listIds?: Array<string>;
+  fromEmail?: string;
+
+  fromName?: string;
 
   name?: string;
 
   orgId?: string;
+
+  previewText?: string | null;
+
+  replyTo?: string | null;
+
+  scheduledAt?: string | null;
 
   sentAt?: string | null;
 
   status?: 'DRAFT' | 'SCHEDULED' | 'SENDING' | 'SENT';
 
   subject?: string;
+
+  totalBounces?: number;
+
+  /**
+   * Total click events
+   */
+  totalClicks?: number;
+
+  /**
+   * Unique opens
+   */
+  totalOpens?: number;
+
+  totalSent?: number;
+
+  totalUnsubscribes?: number;
+
+  /**
+   * Total view events (all pixel loads)
+   */
+  totalViews?: number;
+
+  uniqueClicks?: number;
+
+  updatedAt?: string;
 }
 
 export interface CampaignRetrieveResponse {
@@ -50,17 +81,10 @@ export interface CampaignListResponse {
   campaigns?: Array<Campaign>;
 }
 
-export interface CampaignListParams {
-  limit?: number;
-
-  page?: number;
-}
-
 export declare namespace Campaigns {
   export {
     type Campaign as Campaign,
     type CampaignRetrieveResponse as CampaignRetrieveResponse,
     type CampaignListResponse as CampaignListResponse,
-    type CampaignListParams as CampaignListParams,
   };
 }

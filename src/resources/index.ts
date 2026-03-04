@@ -5,7 +5,6 @@ export {
   type Campaign,
   type CampaignRetrieveResponse,
   type CampaignListResponse,
-  type CampaignListParams,
 } from './campaigns';
 export {
   Customers,

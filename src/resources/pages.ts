@@ -60,8 +60,6 @@ export interface Page {
 
   status?: 'DRAFT' | 'ACTIVE' | 'ENDED' | 'ARCHIVED';
 
-  storeBlocks?: Array<unknown> | null;
-
   updatedAt?: string;
 }
 

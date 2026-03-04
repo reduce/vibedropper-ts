@@ -71,8 +71,6 @@ export interface Form {
 
   status?: 'DRAFT' | 'ACTIVE' | 'ARCHIVED';
 
-  storeBlocks?: Array<unknown> | null;
-
   successMessage?: string | null;
 
   title?: string;

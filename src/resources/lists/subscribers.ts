@@ -1,20 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as CustomersAPI from '../customers';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Subscribers extends APIResource {
   /**
-   * List subscribers
+   * Returns all subscribers for the list ordered by subscribe date descending.
+   * Includes linked customer data.
    */
   list(listID: string, options?: RequestOptions): APIPromise<SubscriberListResponse> {
     return this._client.get(path`/lists/${listID}/subscribers`, options);
   }
 
   /**
-   * Add subscriber to list
+   * Creates or updates the matching customer record and adds a subscriber entry.
+   * Returns 400 with code `duplicate` if already subscribed.
    */
   add(
     listID: string,
@@ -25,7 +28,7 @@ export class Subscribers extends APIResource {
   }
 
   /**
-   * Remove subscriber from list
+   * Remove a subscriber from a list
    */
   remove(
     subscriberID: string,
@@ -40,7 +43,7 @@ export class Subscribers extends APIResource {
 export interface Subscriber {
   id?: string;
 
-  customer?: unknown | null;
+  customer?: CustomersAPI.Customer | null;
 
   customFields?: unknown | null;
 
@@ -70,12 +73,21 @@ export interface SubscriberRemoveResponse {
 export interface SubscriberAddParams {
   email: string;
 
+  /**
+   * Arbitrary key-value metadata
+   */
   customFields?: unknown;
 
   name?: string;
 
+  /**
+   * Pickup location ID (must belong to the given regionId)
+   */
   pickupLocationId?: string;
 
+  /**
+   * Region ID to assign to the customer
+   */
   regionId?: string;
 }
 

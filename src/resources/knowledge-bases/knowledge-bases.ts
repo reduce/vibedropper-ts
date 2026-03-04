@@ -37,7 +37,7 @@ export class KnowledgeBases extends APIResource {
   }
 
   /**
-   * List knowledge bases
+   * Returns all knowledge bases ordered by sortOrder then creation date.
    */
   list(options?: RequestOptions): APIPromise<KnowledgeBaseListResponse> {
     return this._client.get('/knowledge-bases', options);
