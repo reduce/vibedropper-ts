@@ -6,6 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Manage list subscribers
+ */
 export class Subscribers extends APIResource {
   /**
    * Returns all subscribers for the list ordered by subscribe date descending.

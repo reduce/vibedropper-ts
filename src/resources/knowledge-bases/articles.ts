@@ -6,6 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Manage knowledge bases and articles
+ */
 export class Articles extends APIResource {
   /**
    * Create an article

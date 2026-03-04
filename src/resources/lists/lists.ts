@@ -15,6 +15,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Manage subscriber lists
+ */
 export class Lists extends APIResource {
   subscribers: SubscribersAPI.Subscribers = new SubscribersAPI.Subscribers(this._client);
 
