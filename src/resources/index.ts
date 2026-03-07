@@ -5,7 +5,6 @@ export {
   type Campaign,
   type CampaignRetrieveResponse,
   type CampaignListResponse,
-  type CampaignListParams,
 } from './campaigns';
 export {
   Customers,
@@ -17,9 +16,40 @@ export {
   type CustomerListParams,
 } from './customers';
 export {
+  Forms,
+  type Form,
+  type FormRetrieveResponse,
+  type FormUpdateResponse,
+  type FormListResponse,
+  type FormDeleteResponse,
+  type FormListSubmissionsResponse,
+  type FormUpdateParams,
+  type FormListParams,
+  type FormListSubmissionsParams,
+} from './forms';
+export {
+  KnowledgeBases,
+  type KnowledgeBase,
+  type KnowledgeBaseRetrieveResponse,
+  type KnowledgeBaseUpdateResponse,
+  type KnowledgeBaseListResponse,
+  type KnowledgeBaseUpdateParams,
+} from './knowledge-bases/knowledge-bases';
+export {
   Lists,
   type List,
+  type Pagination,
   type ListRetrieveResponse,
   type ListListResponse,
   type ListListParams,
 } from './lists/lists';
+export {
+  Pages,
+  type Page,
+  type PageRetrieveResponse,
+  type PageUpdateResponse,
+  type PageListResponse,
+  type PageDeleteResponse,
+  type PageUpdateParams,
+  type PageListParams,
+} from './pages';

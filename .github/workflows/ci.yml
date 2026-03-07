@@ -24,7 +24,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -51,7 +51,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -65,27 +65,22 @@ jobs:
         run: ./scripts/build
 
       - name: Get GitHub OIDC Token
-        if: github.repository == 'stainless-sdks/vibedropper-typescript'
+        if: |-
+          github.repository == 'stainless-sdks/vibedropper-typescript' &&
+          !startsWith(github.ref, 'refs/heads/stl/')
         id: github-oidc
         uses: actions/github-script@v8
         with:
           script: core.setOutput('github_token', await core.getIDToken());
 
       - name: Upload tarball
-        if: github.repository == 'stainless-sdks/vibedropper-typescript'
+        if: |-
+          github.repository == 'stainless-sdks/vibedropper-typescript' &&
+          !startsWith(github.ref, 'refs/heads/stl/')
         env:
           URL: https://pkg.stainless.com/s
           AUTH: ${{ steps.github-oidc.outputs.github_token }}
           SHA: ${{ github.sha }}
-        run: ./scripts/utils/upload-artifact.sh
-
-      - name: Upload MCP Server tarball
-        if: github.repository == 'stainless-sdks/vibedropper-typescript'
-        env:
-          URL: https://pkg.stainless.com/s?subpackage=mcp-server
-          AUTH: ${{ steps.github-oidc.outputs.github_token }}
-          SHA: ${{ github.sha }}
-          BASE_PATH: packages/mcp-server
         run: ./scripts/utils/upload-artifact.sh
   test:
     timeout-minutes: 10
@@ -98,7 +93,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -107,9 +102,6 @@ jobs:
 
       - name: Bootstrap
         run: ./scripts/bootstrap
-
-      - name: Build
-        run: ./scripts/build
 
       - name: Run tests
         run: ./scripts/test

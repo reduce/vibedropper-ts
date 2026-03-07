@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.4.0 (2026-03-07)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/reduce/vibedropper-ts/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** api update ([9e8f589](https://github.com/reduce/vibedropper-ts/commit/9e8f589ffd840b61f98ca8a4ed5cc35bab8343aa))
+* **api:** manual updates ([fafb1fd](https://github.com/reduce/vibedropper-ts/commit/fafb1fd51f2d03fff0057a2ce3b5268d413e77ea))
+
+
+### Bug Fixes
+
+* **client:** preserve URL params already embedded in path ([bba95bf](https://github.com/reduce/vibedropper-ts/commit/bba95bfb74c1e7557f34586dd6283c6935eb6682))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([e718747](https://github.com/reduce/vibedropper-ts/commit/e718747dfd97f2e304e0b767798ad02940a80b45))
+* **internal:** codegen related update ([bc29037](https://github.com/reduce/vibedropper-ts/commit/bc290373b085c7e8b03b6fa2548ffcd8a98ca7c3))
+* **internal:** codegen related update ([a85618e](https://github.com/reduce/vibedropper-ts/commit/a85618e428a69b5dea6e07575ea6b19a40639f29))
+* update SDK settings ([a3e6a23](https://github.com/reduce/vibedropper-ts/commit/a3e6a23b1d3c29c204b0962a081f05fcb5b4245c))
+
 ## 0.3.0 (2026-03-03)
 
 Full Changelog: [v0.2.2...v0.3.0](https://github.com/reduce/vibedropper-ts/compare/v0.2.2...v0.3.0)
