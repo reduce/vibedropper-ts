@@ -17,13 +17,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  Campaign,
-  CampaignListParams,
-  CampaignListResponse,
-  CampaignRetrieveResponse,
-  Campaigns,
-} from './resources/campaigns';
+import { Campaign, CampaignListResponse, CampaignRetrieveResponse, Campaigns } from './resources/campaigns';
 import {
   Customer,
   CustomerListParams,
@@ -33,7 +27,44 @@ import {
   CustomerUpdateResponse,
   Customers,
 } from './resources/customers';
-import { List, ListListParams, ListListResponse, ListRetrieveResponse, Lists } from './resources/lists/lists';
+import {
+  Form,
+  FormDeleteResponse,
+  FormListParams,
+  FormListResponse,
+  FormListSubmissionsParams,
+  FormListSubmissionsResponse,
+  FormRetrieveResponse,
+  FormUpdateParams,
+  FormUpdateResponse,
+  Forms,
+} from './resources/forms';
+import {
+  Page,
+  PageDeleteResponse,
+  PageListParams,
+  PageListResponse,
+  PageRetrieveResponse,
+  PageUpdateParams,
+  PageUpdateResponse,
+  Pages,
+} from './resources/pages';
+import {
+  KnowledgeBase,
+  KnowledgeBaseListResponse,
+  KnowledgeBaseRetrieveResponse,
+  KnowledgeBaseUpdateParams,
+  KnowledgeBaseUpdateResponse,
+  KnowledgeBases,
+} from './resources/knowledge-bases/knowledge-bases';
+import {
+  List,
+  ListListParams,
+  ListListResponse,
+  ListRetrieveResponse,
+  Lists,
+  Pagination,
+} from './resources/lists/lists';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -263,8 +294,9 @@ export class Vibedropper {
       : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
 
     const defaultQuery = this.defaultQuery();
-    if (!isEmptyObj(defaultQuery)) {
-      query = { ...defaultQuery, ...query };
+    const pathQuery = Object.fromEntries(url.searchParams);
+    if (!isEmptyObj(defaultQuery) || !isEmptyObj(pathQuery)) {
+      query = { ...pathQuery, ...defaultQuery, ...query };
     }
 
     if (typeof query === 'object' && query && !Array.isArray(query)) {
@@ -573,9 +605,9 @@ export class Vibedropper {
       }
     }
 
-    // If the API asks us to wait a certain amount of time (and it's a reasonable amount),
-    // just do what it says, but otherwise calculate a default
-    if (!(timeoutMillis && 0 <= timeoutMillis && timeoutMillis < 60 * 1000)) {
+    // If the API asks us to wait a certain amount of time, just do what it
+    // says, but otherwise calculate a default
+    if (timeoutMillis === undefined) {
       const maxRetries = options.maxRetries ?? this.maxRetries;
       timeoutMillis = this.calculateDefaultRetryTimeoutMillis(retriesRemaining, maxRetries);
     }
@@ -733,14 +765,38 @@ export class Vibedropper {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * Manage subscriber lists
+   */
   lists: API.Lists = new API.Lists(this);
+  /**
+   * Manage customers
+   */
   customers: API.Customers = new API.Customers(this);
+  /**
+   * Access email campaigns (read-only)
+   */
   campaigns: API.Campaigns = new API.Campaigns(this);
+  /**
+   * Manage forms and submissions
+   */
+  forms: API.Forms = new API.Forms(this);
+  /**
+   * Manage knowledge bases and articles
+   */
+  knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
+  /**
+   * Manage landing pages
+   */
+  pages: API.Pages = new API.Pages(this);
 }
 
 Vibedropper.Lists = Lists;
 Vibedropper.Customers = Customers;
 Vibedropper.Campaigns = Campaigns;
+Vibedropper.Forms = Forms;
+Vibedropper.KnowledgeBases = KnowledgeBases;
+Vibedropper.Pages = Pages;
 
 export declare namespace Vibedropper {
   export type RequestOptions = Opts.RequestOptions;
@@ -748,6 +804,7 @@ export declare namespace Vibedropper {
   export {
     Lists as Lists,
     type List as List,
+    type Pagination as Pagination,
     type ListRetrieveResponse as ListRetrieveResponse,
     type ListListResponse as ListListResponse,
     type ListListParams as ListListParams,
@@ -768,6 +825,38 @@ export declare namespace Vibedropper {
     type Campaign as Campaign,
     type CampaignRetrieveResponse as CampaignRetrieveResponse,
     type CampaignListResponse as CampaignListResponse,
-    type CampaignListParams as CampaignListParams,
+  };
+
+  export {
+    Forms as Forms,
+    type Form as Form,
+    type FormRetrieveResponse as FormRetrieveResponse,
+    type FormUpdateResponse as FormUpdateResponse,
+    type FormListResponse as FormListResponse,
+    type FormDeleteResponse as FormDeleteResponse,
+    type FormListSubmissionsResponse as FormListSubmissionsResponse,
+    type FormUpdateParams as FormUpdateParams,
+    type FormListParams as FormListParams,
+    type FormListSubmissionsParams as FormListSubmissionsParams,
+  };
+
+  export {
+    KnowledgeBases as KnowledgeBases,
+    type KnowledgeBase as KnowledgeBase,
+    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
+    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
+    type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
+    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
+  };
+
+  export {
+    Pages as Pages,
+    type Page as Page,
+    type PageRetrieveResponse as PageRetrieveResponse,
+    type PageUpdateResponse as PageUpdateResponse,
+    type PageListResponse as PageListResponse,
+    type PageDeleteResponse as PageDeleteResponse,
+    type PageUpdateParams as PageUpdateParams,
+    type PageListParams as PageListParams,
   };
 }
