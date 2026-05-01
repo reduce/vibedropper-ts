@@ -3,6 +3,7 @@
 export {
   Lists,
   type List,
+  type Pagination,
   type ListRetrieveResponse,
   type ListListResponse,
   type ListListParams,

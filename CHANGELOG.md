@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.4.0 (2026-05-01)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/reduce/vibedropper-ts/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** api update ([9e8f589](https://github.com/reduce/vibedropper-ts/commit/9e8f589ffd840b61f98ca8a4ed5cc35bab8343aa))
+* **api:** manual updates ([fafb1fd](https://github.com/reduce/vibedropper-ts/commit/fafb1fd51f2d03fff0057a2ce3b5268d413e77ea))
+* support setting headers via env ([976bd49](https://github.com/reduce/vibedropper-ts/commit/976bd49501eef47d101b6af13fe85eb63d43cbcb))
+
+
+### Bug Fixes
+
+* **client:** preserve URL params already embedded in path ([bba95bf](https://github.com/reduce/vibedropper-ts/commit/bba95bfb74c1e7557f34586dd6283c6935eb6682))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([38aa475](https://github.com/reduce/vibedropper-ts/commit/38aa475145842f4b16dea8d477b12b4d66b26759))
+* **ci:** skip uploading artifacts on stainless-internal branches ([e718747](https://github.com/reduce/vibedropper-ts/commit/e718747dfd97f2e304e0b767798ad02940a80b45))
+* **format:** run eslint and prettier separately ([c49efc7](https://github.com/reduce/vibedropper-ts/commit/c49efc7457040df19561a811ed098c463af45527))
+* **internal:** codegen related update ([4093c4a](https://github.com/reduce/vibedropper-ts/commit/4093c4a1dfbacf3d3969a4bc2b90b1fcc60ec87b))
+* **internal:** codegen related update ([9f9e99a](https://github.com/reduce/vibedropper-ts/commit/9f9e99a52b6e9805ec447b3354c95e1239ac1b38))
+* **internal:** codegen related update ([bc29037](https://github.com/reduce/vibedropper-ts/commit/bc290373b085c7e8b03b6fa2548ffcd8a98ca7c3))
+* **internal:** codegen related update ([a85618e](https://github.com/reduce/vibedropper-ts/commit/a85618e428a69b5dea6e07575ea6b19a40639f29))
+* **internal:** more robust bootstrap script ([32bb593](https://github.com/reduce/vibedropper-ts/commit/32bb593ff10c464a7f297f4edf5b864de523a445))
+* **internal:** tweak CI branches ([32276a1](https://github.com/reduce/vibedropper-ts/commit/32276a16a1c52a2885f5253553360eb9abcdd76e))
+* **internal:** update dependencies to address dependabot vulnerabilities ([8a462f3](https://github.com/reduce/vibedropper-ts/commit/8a462f3249d0c2f01063c086143b9c6bb6e0f270))
+* **internal:** update gitignore ([9cc8ae5](https://github.com/reduce/vibedropper-ts/commit/9cc8ae5a3715b31a0eec9e0f597f73813621a386))
+* update SDK settings ([a3e6a23](https://github.com/reduce/vibedropper-ts/commit/a3e6a23b1d3c29c204b0962a081f05fcb5b4245c))
+
 ## 0.3.0 (2026-03-03)
 
 Full Changelog: [v0.2.2...v0.3.0](https://github.com/reduce/vibedropper-ts/compare/v0.2.2...v0.3.0)
